@@ -9,21 +9,17 @@
             <p class='text-gray-300' v-if='showcase.copyright' > &copy; {{ showcase.copyright }} </p>
         </header>
         <div class='flex text-xl text-gray-300 ' >
-            <div class='min-w-1/2 pr-5 mb-5 flex justify-center ' >
-                <div v-if="showcase.media_type === 'image'" >
-                    <img v-show='!settings.HD' :src="showcase.url" :alt="showcase.title">
-                    <img v-if='settings.HD'  :src="showcase.hdurl" :alt="showcase.title">
-                </div>
-                <iframe v-else :src="showcase.url" frameborder="0" allowfullscreen allow='encrypted-media' ></iframe>
+            <div v-if="showcase.media_type === 'image'" class='min-w-1/2 pr-5 mb-5 flex justify-center ' >
+                <img v-show='!settings.HD' :src="showcase.url" :alt="showcase.title">
+                <img v-if='settings.HD'  :src="showcase.hdurl" :alt="showcase.title">
             </div>
+            <iframe v-else class=' pr-5 mb-5 min-w-1/2 ' :src="showcase.url" frameborder="0" allowfullscreen allow='encrypted-media' ></iframe>
             <div>
                 <p class=' font-light ' > {{ showcase.explanation }} </p>
                 <div class='py-5 flex all:mr-2 ' >
                     <a :href="showcase.hdurl" title='Image source' target="_blank" > 
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg> 
                     </a>
-
-                    
                     <button @click='randomAPOD' title='Random picture of the day' >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                     </button>
@@ -86,8 +82,7 @@ export default {
             const res = await HTTP.get(`planetary/apod?count=1&api_key=${apiKey}`)
             this.showcases = res.data
             // console.log(res)
-        }
-
+        },
     }
 }
 </script>
