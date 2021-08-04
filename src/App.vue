@@ -1,6 +1,6 @@
 <template >
-    <!-- <Search /> -->
-    <Showcase />
+  <!-- <Search /> -->
+  <Showcase />
 </template>
 
 <script>
@@ -12,10 +12,9 @@ export default {
   components: {
     // Search,
     Showcase,
-  }
+  },
 }
 </script>
 
 <style>
-
 </style>
