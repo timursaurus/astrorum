@@ -1,5 +1,5 @@
 <template>
-  <main class="px-10 bg-black text-gray-100">
+  <main class="md:px-10 px-2 bg-black text-gray-100">
     <article class="min-h-screen" v-for="showcase in showcases" :key="showcase.url">
       <header class="py-5">
         <h1 class="font-serif text-4xl">{{ showcase.title }}</h1>
@@ -16,7 +16,10 @@
         <div>
           <p class="font-light">{{ showcase.explanation }}</p>
           <div class="py-5 flex all:mr-2">
-            <a :href="showcase.hdurl" title="Image source" target="_blank">
+            <a v-if="!settings.HD" :href="showcase.url" title="Image source" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+            </a>
+            <a v-else :href="showcase.hdurl" title="Image source" target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </a>
             <button @click="randomAPOD" title="Random picture of the day">
@@ -25,11 +28,6 @@
             <button @click="settings.HD = !settings.HD" title="Change image quality" :class="{ ' text-yellow-400': settings.HD }">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
             </button>
-
-            <!-- <button class='flex' > 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        <input class='rounded-md bg-black text-gray-300' type="date" min="1995-06-16" :max='new Date().toISOString().slice(0, 10)' > 
-                    </button> -->
           </div>
           <hr />
           <footer class="py-2 font-light all:py-1">
