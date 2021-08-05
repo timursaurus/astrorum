@@ -43,9 +43,7 @@
 </template>
 
 <script>
-import { HTTP } from '../api.js'
-let apiKey = 'zXdOgCAKTWjfRv44T0utnneLucGWDugpkcsfh7BS'
-//datepicker.max = new Date().toISOString().slice(0, 10)
+import { HTTP, apiKey } from '../api.js'
 
 export default {
   name: 'Showcase',
