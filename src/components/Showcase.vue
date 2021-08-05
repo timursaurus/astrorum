@@ -7,10 +7,10 @@
         <time class="text-gray-300"> {{ showcase.date }} </time>
         <p class="text-gray-300" v-if="showcase.copyright">&copy; {{ showcase.copyright }}</p>
       </header>
-      <div class="sm:flex text-xl text-gray-300">
-        <div v-if="showcase.media_type === 'image'" class="min-w-1/2 pr-5 mb-5">
-          <img v-show="!settings.HD" :src="showcase.url" :alt="showcase.title" />
-          <img v-if="settings.HD" :src="showcase.hdurl" :alt="showcase.title" />
+      <div class="md:flex text-xl text-gray-300">
+        <div v-if="showcase.media_type === 'image'" class="min-w-1/2 md:pr-5 mb-5">
+          <img class="min-w-full" v-show="!settings.HD" :src="showcase.url" :alt="showcase.title" />
+          <img class="min-w-full" v-if="settings.HD" :src="showcase.hdurl" :alt="showcase.title" />
         </div>
         <iframe v-else class="pr-5 mb-5 min-w-1/2" :src="showcase.url" frameborder="0" allowfullscreen allow="encrypted-media"></iframe>
         <div>
@@ -32,7 +32,7 @@
                     </button> -->
           </div>
           <hr />
-          <footer class="py-2 all:py-1">
+          <footer class="py-2 font-light all:py-1">
             <p>Made with ♥ by <a class="hover:underline" href="https://github.com/timursaurus">Timur Bolotov</a></p>
             <p>Powered by <a class="hover:underline" href="https://api.nasa.gov/">NASA API</a></p>
           </footer>
