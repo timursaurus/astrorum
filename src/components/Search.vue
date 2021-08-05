@@ -4,12 +4,12 @@
       <h1 class="text-white text-4xl">Astrorum</h1>
       <div class="relative text-gray-500">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute p-1 m-1 right-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-        <input v-model="query" @change="search" @submit="search" class="rounded-md text-gray-100 py-1 px-2 bg-dark-100 placeholder-gray-500" type="text" placeholder="Explore the space" />
+        <input v-model="query" @change="search" @blur='search' @submit="search" class="rounded-md text-gray-100 py-1 px-2 bg-dark-100 placeholder-gray-500" type="text" placeholder="Explore the space" />
       </div>
     </div>
     <div>
-      <input type="range" :min="settings.start" :max="settings.end" v-model="sliderStart" step="1" />
-      <input type="range" :min="settings.start" :max="settings.end" v-model="sliderEnd" step="1" />
+      <input type="range" :min="settings.start" :max="settings.end" v-model="sliderStart" step="1" @blur='search'  />
+      <input type="range" :min="settings.start" :max="settings.end" v-model="sliderEnd" step="1" @blur='search' />
     </div>
     <div>
       <button></button>
@@ -17,13 +17,14 @@
   </header>
   <main class="px-10 bg-black text-gray-100">
     <h1>Res</h1>
+    <p v-if='results.meta' > {{ results.meta }} findings for "{{ query }}" between {{ slider.start_date }} and {{ slider.end_date }}  </p>
     <div v-for="(res, index) in results.items" :key="index">
       <div class="py-5">
         <header class='text-gray-300' >
           <h3 class='font-serif text-xl text-gray-100 ' >{{ res.data[0].title }}</h3>
           <h4> {{ res.data[0].center }} <span v-if='res.data[0].secondary_creator' class='' > &mdash; {{ res.data[0].secondary_creator }} </span> </h4>
           
-          <time class='' > {{ res.data[0].date_created.slice(0, 10) }} </time>
+          <time class='' > {{ res.data[0].date_created.slice(0, 10).toString() }} </time>
         </header>
         <div class='relative' >
           <img :src="res.links[0].href" :alt="res.data[0].title" class='py-2' />
@@ -55,6 +56,7 @@ export default {
       results: {
         items: [],
         links: [],
+        meta: 0,
       },
     }
   },
@@ -104,6 +106,7 @@ export default {
 
       this.results.items = res.data.collection.items
       this.results.links = res.data.collection.links
+      this.results.meta = res.data.collection.metadata.total_hits
       console.log(this.results.items)
 
       console.log(res)
