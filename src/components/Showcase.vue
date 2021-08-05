@@ -7,8 +7,8 @@
         <time class="text-gray-300"> {{ showcase.date }} </time>
         <p class="text-gray-300" v-if="showcase.copyright">&copy; {{ showcase.copyright }}</p>
       </header>
-      <div class="flex text-xl text-gray-300">
-        <div v-if="showcase.media_type === 'image'" class="min-w-1/2 pr-5 mb-5 flex justify-center">
+      <div class="sm:flex text-xl text-gray-300">
+        <div v-if="showcase.media_type === 'image'" class="min-w-1/2 pr-5 mb-5">
           <img v-show="!settings.HD" :src="showcase.url" :alt="showcase.title" />
           <img v-if="settings.HD" :src="showcase.hdurl" :alt="showcase.title" />
         </div>
