@@ -1,6 +1,6 @@
 <template>
   <main class="md:px-10 px-2 bg-black text-gray-100">
-    <article class="min-h-screen" v-for="showcase in showcases" :key="showcase.url">
+    <article class="min-h-screen">
       <header class="py-5">
         <h1 class="font-serif text-4xl">{{ showcase.title }}</h1>
         <h2 class="text-xl text-gray-200">Astronomy Picture of the Day</h2>
@@ -47,7 +47,7 @@ export default {
   name: 'Showcase',
   data() {
     return {
-      showcases: [
+      showcase: {
         // title: null,
         // date: null,
         // explanation: null,
@@ -55,7 +55,7 @@ export default {
         // url: null,
         // media_type: null,
         // copyright: 'timursaurus',
-      ],
+      },
       settings: {
         HD: false,
         date: null,
@@ -68,13 +68,13 @@ export default {
   methods: {
     async loadAPOD() {
       const today = new Date().toISOString().slice(0, 10)
-      const res = await HTTP.get(`planetary/apod?start_date=${today}&end_date=${today}&api_key=${apiKey}`)
-      this.showcases = res.data
+      const res = await HTTP.get(`planetary/apod?&api_key=${apiKey}`)
+      this.showcase = res.data
       // console.log(res)
     },
     async randomAPOD() {
       const res = await HTTP.get(`planetary/apod?count=1&api_key=${apiKey}`)
-      this.showcases = res.data
+      this.showcase = res.data[0]
       // console.log(res)
     },
   },
