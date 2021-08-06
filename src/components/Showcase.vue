@@ -15,17 +15,17 @@
         <iframe v-else class="pr-5 mb-5 min-w-1/2" :src="showcase.url" frameborder="0" allowfullscreen allow="encrypted-media"></iframe>
         <div>
           <p class="font-light">{{ showcase.explanation }}</p>
-          <div class="py-5 flex all:mr-2">
-            <a v-if="!settings.HD" :href="showcase.url" title="Image source" target="_blank">
+          <div class="py-5 flex all:mr-2 duration-100 ">
+            <a v-if="!settings.HD" :href="showcase.url" title="Image source" class='hover:text-light-blue-500' target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </a>
-            <a v-else :href="showcase.hdurl" title="Image source" target="_blank">
+            <a v-else :href="showcase.hdurl" title="Image source" class='hover:text-light-blue-500' target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </a>
-            <button @click="randomAPOD" title="Random picture of the day">
+            <button @click="randomAPOD" title="Random picture of the day" class='hover:text-green-500' >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
             </button>
-            <button @click="settings.HD = !settings.HD" title="Change image quality" :class="{ ' text-yellow-400': settings.HD }">
+            <button @click="settings.HD = !settings.HD" title="Change image quality" class='hover:text-yellow-400  ' :class="{ ' text-yellow-400': settings.HD }">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
             </button>
           </div>
@@ -67,7 +67,6 @@ export default {
   },
   methods: {
     async loadAPOD() {
-      const today = new Date().toISOString().slice(0, 10)
       const res = await HTTP.get(`planetary/apod?&api_key=${apiKey}`)
       this.showcase = res.data
       // console.log(res)
