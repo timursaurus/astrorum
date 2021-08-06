@@ -31,7 +31,7 @@
           </div>
           <hr />
           <footer class="py-2 font-light all:py-1">
-            <p>Made with <span class='italic' >love & care</span> by <a class="hover:underline" href="https://github.com/timursaurus">Timur Bolotov</a></p>
+            <p>Made with <span class="italic">love & care</span> by <a class="hover:underline" href="https://github.com/timursaurus">Timur Bolotov</a></p>
             <p>Powered by <a class="hover:underline" href="https://api.nasa.gov/">NASA API</a></p>
           </footer>
         </div>
