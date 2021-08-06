@@ -1,13 +1,14 @@
 <template>
   <header class="bg-dark-800 py-5 px-10">
-    <div class="flex">
-      <a href="/"><h1 class="text-white text-4xl">Astrorum</h1></a>
-      <div class="relative text-gray-500">
-        <svg @click="search" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute cursor-pointer p-1 m-1 right-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-        <input v-model="query" @change="search" @focus="search" @blur="search" @click="search" @submit="search" class="rounded-md text-gray-100 py-1 px-2 bg-dark-100 placeholder-gray-500" type="text" placeholder="Explore the space" />
+    <div class="md:flex md:justify-between self-center">
+      <a href="https://github.com/timursaurus/astrorum"><h1 class="text-white text-4xl max-w-10">Astrorum</h1></a>
+      <div class="relative text-gray-500 py-2">
+        <svg @click="search" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute cursor-pointer mx-2 m-1 right-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+        <input v-model="query" @change="search" @focus="search" @blur="search" @click="search" @submit="search" class="rounded-md max-w-screen-sm <md:min-w-full lg:w-120 text-gray-500 text-lg py-1 px-2 bg-dark-100 placeholder-gray-500" type="text" placeholder="Explore the space" />
       </div>
+      <div class="min-w-10 text-gray-100"></div>
     </div>
-    <div class="slider py-5 mx-10">
+    <div class="slider md:py-5 md:mx-10 py-2">
       <!-- <div class='flex text-gray-100 max-w-full ' >  
           <p v-for="(year) in (settings.end - settings.start)" :key=year >{{ year }}</p>     
       </div> -->
