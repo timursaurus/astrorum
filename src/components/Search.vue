@@ -17,11 +17,18 @@
       </div> -->
       <div class="flex justify-between text-gray-500">
         <p>{{ settings.start }}</p>
-
+        <div class='flex text-gray-300 ' >
+          <p> {{ slider.start_date }} </p>
+          <p class='px-1' > &mdash; </p>
+          <p> {{ slider.end_date }} </p>
+        </div>
         <p>{{ settings.end }}</p>
+      </div >
+      <div class='relative' >
+        <input type="range" class='tip' :min="settings.start" :max="settings.end" v-model="sliderStart" step="1" @blur="search" />
+        <input type="range" class='tip' :min="settings.start" :max="settings.end" v-model="sliderEnd" step="1" @blur="search" />
       </div>
-      <input type="range" :min="settings.start" :max="settings.end" v-model="sliderStart" step="1" @blur="search" />
-      <input type="range" :min="settings.start" :max="settings.end" v-model="sliderEnd" step="1" @blur="search" />
+    
     </div>
   </header>
   <main class="md:px-10 px-2 bg-black text-gray-100">
@@ -176,7 +183,6 @@ export default {
 .slider input[type='range']::-webkit-slider-thumb {
   z-index: 2;
   margin-top: -6px;
-  background: red; 
   
   
 }
@@ -187,11 +193,12 @@ export default {
 
 .slider input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
-  background: #fff;
   border-radius: 20px;
-  height: 3px;
+  height: 5px;
   cursor: pointer;
   box-shadow: none;
-  border: 0;
+  border: none;
 }
+
+
 </style>
