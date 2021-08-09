@@ -33,7 +33,7 @@
   </header>
   <main class="md:px-10 px-2 bg-black text-gray-100">
     <div class='py-2 sm:flex justify-between ' >
-      <p v-if="query.length >= 1"  >{{ results.meta }} findings for "{{ query }}" between {{ slider.start_date }} and {{ slider.end_date }}</p>
+      <p v-if="query.length >= 1 && !checkDate()"  >{{ results.meta }} findings for "{{ query }}" between {{ slider.start_date }} and {{ slider.end_date }}</p>
       <div v-if='results.meta > 100' class='flex <sm:my-2 ' >
         <button :disabled='settings.page === 1' @click="settings.page -= 1;search()" ><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
         <p class='mx-2' >{{ settings.page }} </p>
@@ -66,6 +66,7 @@
 
 <script>
 import { SEARCH } from '../api.js'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Search',
@@ -124,6 +125,9 @@ export default {
     this.UpToDate()
   },
   methods: {
+
+    ...mapMutations(['changeApod']),
+
     UpToDate() {
       const today = new Date().getFullYear()
       // console.log(today)
@@ -139,9 +143,28 @@ export default {
       this.settings.maxPage = 1
 
     },
+
+    checkDate() {
+      if(Date.parse(this.query) && this.query.length >= 7) {
+
+        let date = new Date(this.query) 
+        let today = new Date()
+        if ( today > date ) {
+          return true
+        }
+      }
+    },
+    
     async search() {
-      console.log('SEARCH', this.query.length)
-      if (this.query.length >= 1) {
+      // console.log('SEARCH', this.query.length)
+      if (this.checkDate()) {
+        let date = new Date(this.query).toISOString().substr(0,10)
+      
+        this.changeApod(date)
+        
+      } 
+
+      else if (this.query.length >= 1) {
         const res = await SEARCH.get(`/search?q=${this.query}&page=${this.settings.page}&media_type=image&year_start=${this.slider.start_date}&year_end=${this.slider.end_date}`)
 
         if (this.query !== this.settings.prevQuery) {

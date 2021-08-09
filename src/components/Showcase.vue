@@ -42,7 +42,7 @@
 
 <script>
 import { HTTP, apiKey } from '../api.js'
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'Showcase',
   data() {
@@ -62,6 +62,16 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapGetters(['apod']),
+  },
+  watch: {
+    apod: {
+      handler(apod) {
+        this.dateAPOD(apod)
+      }
+    }
+  },
   mounted() {
     this.loadAPOD()
   },
@@ -76,6 +86,10 @@ export default {
       this.showcase = res.data[0]
       // console.log(res)
     },
+    async dateAPOD(date) {
+      const res = await HTTP.get(`planetary/apod?date=${date}&api_key=${apiKey}`)
+      this.showcase = res.data
+    }
   },
 }
 </script>
