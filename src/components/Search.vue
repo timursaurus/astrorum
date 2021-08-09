@@ -147,9 +147,11 @@ export default {
     checkDate() {
       if(Date.parse(this.query) && this.query.length >= 7) {
 
+        let past = new Date('1995-06-16')
         let date = new Date(this.query) 
         let today = new Date()
-        if ( today > date ) {
+
+        if ( today > date && date > past ) {
           return true
         }
       }
